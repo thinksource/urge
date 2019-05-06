@@ -1,7 +1,14 @@
 __author__ = "sheng lu"
 
 
-# every step need 
+# each step forword
+# input:
+# start: start of the step
+# data: data map
+# direction: direction of the next step
+# output:
+# end: end of the step
+# coin: coins get of the step
 def nextstep(start, data, direction):
     step=[0,0]
     if direction == 'N':
@@ -9,9 +16,9 @@ def nextstep(start, data, direction):
     elif direction == 'S':
         step = [0, 1]
     elif direction == 'W':
-        step = [1, 0]
-    elif direction == 'E':
         step = [-1, 0]
+    elif direction == 'E':
+        step = [1, 0]
     #bondary limitation
     if start[1] + step[1] < 0 or start[1] + step[1] >= len(data):
         step = [0, 0]
@@ -21,11 +28,13 @@ def nextstep(start, data, direction):
     elif data[start[1] + step[1]][start[0] + step[0]] == -1:
         step = [0, 0]
     if step == [0, 0]:
+        # print('No step: {0}--{1}'.format(start[0], start[1]))
         return start, 0;
     else:
-        end = [start[1] + step[1], start[0] + step[0]]
+        end = [start[0] + step[0], start[1] + step[1]]
         coins = data[end[1]][end[0]]
         data[end[1]][end[0]] = 0
+        # print('Step to: {0}--{1}'.format(end[0], end[1]))
         return end, coins
 
 def pacman(input_file):
@@ -40,27 +49,31 @@ def pacman(input_file):
         2. final_pos_y (int) = final y location of Pacman
         3. coins_collected (int) = the number of coins that have been collected by Pacman across all movements
     """
-    f = oepn(input_file, 'r+')
+    f = open(input_file, 'r+')
     lines = f.readlines()
-    demension = map(int, lines[0].split(" "))
+    demension = list(map(int, lines[0].split(" ")))
     col = [1] * demension[1]
     data = []
     for i in range(demension[0]):
         data.append(col.copy())
-    start = map(int, line[1].split(" "))
+    start = list(map(int, lines[1].split(" ")))
     spath = lines[2]
     for i in range(3, len(lines)):
-        wall = map(int, lines[i].split(" "))
-        data[wall[0], wall[1]] = -1
+        wall = list(map(int, lines[i].split(" ")))
+        data[wall[1]][wall[0]] = -1
     f.close()
     coins_collected = 0
+    if data[start[1]][start[0]]==1:
+        coins_collected+=1
+        data[start[1]][start[0]]=0
     
     for p in spath:
         coins = 0
-        start, coins=nextstep(start, data, p);
-        coins_collected+=coins
+        if p in ['N', 'E', 'S', 'W']:
+            start, coins=nextstep(start, data, p);
+            coins_collected+=coins
 
-    return start[0], start[1], conins_collected
+    return start[0], start[1], coins_collected
         
 
     # return final_pos_x, final_pos_y, coins_collected 

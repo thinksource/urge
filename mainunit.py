@@ -2,8 +2,9 @@ import unittest
 from main import *
 
 class TestStep(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.data=[[1,1,1],[1,1,1],[1,1,1]]
+
     def test_step_gowest(self):
         start=[1,1]
         end, coin=nextstep(start,self.data.copy(), 'W')

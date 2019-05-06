@@ -18,6 +18,7 @@ python3 main.py
 
 The array and directions is as fellow example:
 
+```
 
 	0	1	2	3	4	X direction
 
@@ -41,7 +42,7 @@ t
 i
 o
 n
-
+```
 ### additional setting
 
 1. the pcman only first time pass the map will get coins. the next time it would just get 0 coins 

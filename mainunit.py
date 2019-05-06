@@ -31,6 +31,7 @@ class TestStep(unittest.TestCase):
         end, coin=nextstep(start, self.data.copy(), 'E')
         self.assertEqual(end, [2, 1])
         self.assertEqual(coin, 0)
+        start=[1,1]
         selfdata[1][2]=-1
         end, coin=nextstep(start, selfdata, 'E')
         self.assertEqual(end, [1,1])
@@ -40,19 +41,20 @@ class TestStep(unittest.TestCase):
     def test_step_gonorth(self):
         start=[1,1]
         end, coin=nextstep(start, self.data.copy(), 'N')
-        self.assertEqual(end, [1,0])
+        self.assertEqual(end, [1, 0])
         self.assertEqual(coin, 1)
         selfdata=self.data.copy()
         start=[1,0]
         end, coin=nextstep(start, self.data.copy(), 'N')
         self.assertEqual(end, [1, 0])
         self.assertEqual(coin, 0)
+        start=[1,1]
         selfdata[0][1]=-1
         end, coin=nextstep(start, selfdata, 'N')
         self.assertEqual(end, [1,1])
         self.assertEqual(coin, 0)
 
-    def test_step_gonorth(self):
+    def test_step_gosouth(self):
         start=[1,1]
         end, coin=nextstep(start,self.data.copy(), 'S')
         self.assertEqual(end, [1,2])
@@ -62,9 +64,10 @@ class TestStep(unittest.TestCase):
         end, coin=nextstep(start,self.data.copy(), 'S')
         self.assertEqual(end, [1, 2])
         self.assertEqual(coin, 0)
+        start=[1,1]
         selfdata[2][1]=-1
         end, coin=nextstep(start, selfdata, 'S')
-        self.assertEqual(end, [1,1])
+        self.assertEqual(end, [1, 1])
         self.assertEqual(coin, 0)
 
 if __name__ == '__main__':

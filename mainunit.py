@@ -70,5 +70,12 @@ class TestStep(unittest.TestCase):
         self.assertEqual(end, [1, 1])
         self.assertEqual(coin, 0)
 
+class TestPacMan(unittest.TestCase):
+    def test_exe_pacman(self):
+        final_pos_x, final_pos_y, coins_collected=pacman("input.txt")
+        self.assetEqual(final_pos_x, 1)
+        self.assetEqual(final_pos_y, 1)
+        self.assetEqual(coins_collected, 7)
+
 if __name__ == '__main__':
     unittest.main()

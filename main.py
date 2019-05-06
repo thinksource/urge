@@ -70,7 +70,7 @@ def pacman(input_file):
     for p in spath:
         coins = 0
         if p in ['N', 'E', 'S', 'W']:
-            start, coins=nextstep(start, data, p);
+            start, coins=nextstep(start, data, p)
             coins_collected+=coins
 
     return start[0], start[1], coins_collected

@@ -53,6 +53,8 @@ def pacman(input_file):
     with open(input_file) as f:
         lines = f.readlines()
     f.close()
+    if not lines:
+        return 0, 0, 0
     demension = list(map(int, lines[0].split(" ")))
     col = [1] * demension[1]
     data = []

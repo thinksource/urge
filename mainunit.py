@@ -77,5 +77,11 @@ class TestPacMan(unittest.TestCase):
         self.assertEqual(final_pos_y, 1)
         self.assertEqual(coins_collected, 7)
 
+    def test_exe_empty(self):
+        x, y, coins=pacman("empty.txt")
+        self.assertEqual(x, 0)
+        self.assertEqual(y, 0)
+        self.assertEqual(coins, 0)
+
 if __name__ == '__main__':
     unittest.main()

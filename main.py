@@ -49,8 +49,10 @@ def pacman(input_file):
         2. final_pos_y (int) = final y location of Pacman
         3. coins_collected (int) = the number of coins that have been collected by Pacman across all movements
     """
-    f = open(input_file, 'r+')
-    lines = f.readlines()
+    lines=[]
+    with open(input_file) as f:
+        lines = f.readlines()
+    f.close()
     demension = list(map(int, lines[0].split(" ")))
     col = [1] * demension[1]
     data = []
@@ -61,7 +63,7 @@ def pacman(input_file):
     for i in range(3, len(lines)):
         wall = list(map(int, lines[i].split(" ")))
         data[wall[1]][wall[0]] = -1
-    f.close()
+
     coins_collected = 0
     if data[start[1]][start[0]]==1:
         coins_collected+=1
